@@ -103,7 +103,7 @@ public class SwipeListView extends ListView {
                 }
 
 
-                View view = getChildAt(mTouchPosition);//获得触摸的View
+                View view = getChildAt(mTouchPosition- getFirstVisiblePosition());//获得触摸的View
                 if (view instanceof SwipeLayout) {
                     System.out.println("get touch view !!!");
                     mTouchView = (SwipeLayout) view;

@@ -2,6 +2,7 @@ package com.ls.main;
 
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class MainActivity extends Activity implements SwipeListView.OnSwipeViewC
         swipeListView = (SwipeListView) findViewById(R.id.swipeListView);
         //    ListView listView = (ListView) findViewById(R.id.test);
         swipeListView.setOnSwipeViewClickListener(this);
-        applicationInfos = getPackageManager().getInstalledApplications(0);
+        applicationInfos = getPackageManager().getInstalledApplications(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
         appAdapter = new AppAdapter();
         //    listView.setAdapter(appAdapter);
         swipeListView.setAdapter(appAdapter);
@@ -76,9 +77,9 @@ public class MainActivity extends Activity implements SwipeListView.OnSwipeViewC
                 openItem(item);
                 break;
             case 1:
-                applicationInfos.remove(item);
+                applicationInfos.remove(position);
                 appAdapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(), "delete " + item.className,
+                Toast.makeText(getApplicationContext(), "delete " + item.className+"   position "+position,
                         Toast.LENGTH_SHORT).show();
                 break;
         }
